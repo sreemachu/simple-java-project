@@ -1,0 +1,18 @@
+pipeline{
+    agent any
+    environnment{
+        PATH "/something:$PATH"
+    }
+    stages{
+        stage("Git Checkout"){
+            steps{
+                git credentialsId: 'Git-Credentials', url: 'https://github.com/sreemachu/simple-java-project.git'
+            }
+        }
+        stage("Maven Build"){
+            steps{
+                sh "mvn clean package"
+            }
+        }
+    }
+}
